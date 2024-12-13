@@ -4,6 +4,8 @@
 
 #include "ub_util.h"
 
+#undef NULL
+#include <string.h>
 
 #ifndef boolean
 #define boolean int
@@ -36,6 +38,15 @@ int  ub_putsW(ushort *s)
 	return 0;
 }
 
+void ub_putsYn(int f)
+{
+	if(f) {
+		ub_puts("True\n");
+	}else{
+		ub_puts("False\n");
+	}
+}
+
 void   cmd_User( void )
 {
 	char buf[1024];
@@ -43,6 +54,12 @@ void   cmd_User( void )
 	
 	ub_puts("user: ");
 	ub_puts(buf);
+	
+	ub_puts("cmp: aaa");
+	ub_putsYn( strcmp("aaa","aaa") );
+	ub_puts("cmp: aaaa");
+	ub_putsYn( strcmp("aaa","aaaa") );
+	
 	
 }
 
@@ -166,7 +183,11 @@ static int ub_putchar(int character)
 void ub_outchar(uchar c)
 {
 	if( inhibitOutput ) return;
+	if( c == '\n' ) {
+		ub_putchar( '\r' );
+	}
 	ub_putchar(c);
+
 }
 
 /***********************************************************/
