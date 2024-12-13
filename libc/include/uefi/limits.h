@@ -1,0 +1,3 @@
+#ifndef LONG_MAX
+#define LONG_MAX 9223372036854775807L
+#endif
