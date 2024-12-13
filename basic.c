@@ -122,6 +122,7 @@ void ub_backspace(void);
 #ifdef ENABLE_FILEIO
 // functions defined elsehwere
 void   cmd_Files( void );
+void   cmd_User( void );
 uchar *filenameWord(void);
 //static boolean sd_is_initialized = false;
 #endif
@@ -186,6 +187,7 @@ static cchar *keywords[]= {
 	"END",
 	"RSEED",
 	"CHAIN",
+	"USER",
 	NULL
 };
 
@@ -208,6 +210,7 @@ enum {
 	KW_END,
 	KW_RSEED,
 	KW_CHAIN,
+	KW_USER,
 	KW_DEFAULT /* always the final one*/
 };
 
@@ -1048,6 +1051,8 @@ interperateAtTxtpos:
 		goto list;
 	case KW_CHAIN:
 		goto chain;
+	case KW_USER:
+		goto user;
 	case KW_LOAD:
 		goto load;
 	case KW_MEM:
@@ -1485,6 +1490,11 @@ files:
 	goto unimplemented;
 #endif // ENABLE_FILEIO
 
+	
+user:
+	cmd_User();
+	goto warmstart;
+	
 
 chain:
 	runAfterLoad = true;

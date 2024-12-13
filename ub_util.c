@@ -36,6 +36,16 @@ int  ub_putsW(ushort *s)
 	return 0;
 }
 
+void   cmd_User( void )
+{
+	char buf[1024];
+	strcpy(buf,"Hello,world\n");
+	
+	ub_puts("user: ");
+	ub_puts(buf);
+	
+}
+
 
 /***************************************************************************/
 /* Function declaration for GCC */
