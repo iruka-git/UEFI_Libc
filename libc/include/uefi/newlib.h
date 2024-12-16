@@ -11,4 +11,6 @@ typedef unsigned int wint_t;
 
 #define _LIBC
 
+#define _LDBL_EQ_DBL
+
 #endif //_LIBC_NEWLIB_H_
