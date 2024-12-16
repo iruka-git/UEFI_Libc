@@ -369,6 +369,7 @@ LibcObjs = \
 	libc/ctype/isblank_l.o  \
 	libc/ctype/tolower.o  \
 	libc/ctype/isalpha.o  \
+	libc/sys/x64uefi/syscalls.o  \
 
 #
 #	libc/stdio/nano-svfprintf.o  \
