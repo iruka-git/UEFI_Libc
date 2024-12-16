@@ -241,7 +241,6 @@ int _dummy_mallocr = 1;
 
 
 
-
 /* Preliminaries */
 
 #ifndef __STD_C
@@ -307,7 +306,7 @@ extern "C" {
 #include <reent.h>
 
 #define POINTER_UINT unsigned _POINTER_INT
-#define SEPARATE_OBJECTS
+//#define SEPARATE_OBJECTS
 #define HAVE_MMAP 0
 #define MORECORE(size) _sbrk_r(reent_ptr, (size))
 #define MORECORE_CLEARS 0

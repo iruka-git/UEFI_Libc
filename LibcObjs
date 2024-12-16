@@ -369,6 +369,15 @@ LibcObjs = \
 	libc/ctype/isblank_l.o  \
 	libc/ctype/tolower.o  \
 	libc/ctype/isalpha.o  \
+	libc/stdlib/mlock.o  \
+	libc/stdlib/malloc.o  \
+	libc/stdlib/_mallocr.o  \
+	libc/stdlib/system.o  \
+	libc/stdlib/rand_r.o  \
+	libc/stdlib/exit.o  \
+	libc/stdlib/atexit.o  \
+	libc/stdlib/__atexit.o  \
+	libc/stdlib/__call_atexit.o  \
 	libc/sys/x64uefi/syscalls.o  \
 
 #
@@ -385,6 +394,7 @@ LibcObjs = \
 #	libc/stdio/nano-vfprintf_float.o  \
 #	libc/stdio/nano-vfscanf_float.o  \
 
+#	libc/stdlib/reallocr.o  \
 
 # libefi.soと二重定義.
 #	libc/string/memset.o \
