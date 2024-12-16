@@ -35,7 +35,6 @@ int _link(void)			{return 0;}
 int _localeconv_r(void)	{return 0;}
 int _mbrtowc_r(void)	{return 0;}
 int _mkdir(void)		{return 0;}
-int _sbrk(void)			{return 0;}
 int _stat(void)			{return 0;}
 int _stat64(void)		{return 0;}
 int _strtod_r(void)		{return 0;}
@@ -46,7 +45,6 @@ int _vfwscanf_r(void)	{return 0;}
 int _wait(void)			{return 0;}
 int _wcrtomb_r(void)	{return 0;}
 int _wcsrtombs_r(void)	{return 0;}
-int _write(void)		{return 0;}
 int abort(void)			{return 0;}
 int btowc(void)			{return 0;}
 int getenv(void)		{return 0;}
@@ -55,6 +53,8 @@ int environ(void)		{return 0;}
 
 
 /*
+int _sbrk(void)			{return 0;}
+int _write(void)		{return 0;}
 int realloc(void)		{return 0;}
 int malloc(void)		{return 0;}
 int _malloc_r(void)		{return 0;}

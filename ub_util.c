@@ -4,8 +4,8 @@
 
 #include "ub_util.h"
 
-#undef NULL
-#include <string.h>
+//#undef NULL
+//#include <string.h>
 
 #ifndef boolean
 #define boolean int
@@ -45,22 +45,6 @@ void ub_putsYn(int f)
 	}else{
 		ub_puts("False\n");
 	}
-}
-
-void   cmd_User( void )
-{
-	char buf[1024];
-	strcpy(buf,"Hello,world\n");
-	
-	ub_puts("user: ");
-	ub_puts(buf);
-	
-	ub_puts("cmp: aaa");
-	ub_putsYn( strcmp("aaa","aaa") );
-	ub_puts("cmp: aaaa");
-	ub_putsYn( strcmp("aaa","aaaa") );
-	
-	
 }
 
 

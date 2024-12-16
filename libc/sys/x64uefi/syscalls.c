@@ -344,28 +344,26 @@ int
 _swiwrite (int file, const void * ptr, size_t len)
 {
   int fh = remap_handle (file);
-#ifdef ARM_RDI_MONITOR
   int block[3];
 
   block[0] = fh;
   block[1] = (int) ptr;
   block[2] = (int) len;
 
-  return do_AngelSWI (AngelSWI_Reason_Write, block);
-#else
-  register int r0 asm("r0") = fh;
-  register int r1 asm("r1") = (int) ptr;
-  register int r2 asm("r2") = (int) len;
+//  return do_AngelSWI (AngelSWI_Reason_Write, block);
 
-  asm ("swi %a4"
-       : "=r" (r0)
-       : "0"(fh), "r"(r1), "r"(r2), "i"(SWI_Write));
-  return r0;
-#endif
+// STDOUTを仮定.
+
+	char *p = ptr;
+	int i;
+	for(i=0;i<len;i++) {
+		ub_putchar(*p++);
+	}
+	return len;
 }
 
 /* file, is a user file descriptor. */
-int __attribute__((weak))
+int //__attribute__((weak))
 _write (int file, const void * ptr, size_t len)
 {
   int slot = findslot (remap_handle (file));
@@ -533,6 +531,24 @@ _getpid (void)
   return (pid_t)1;
 }
 
+char mempool[0x10000];
+
+void *
+_sbrk (ptrdiff_t incr)
+{
+	static char * heap_end;
+	char *        prev_heap_end;
+	if (heap_end == NULL) {
+		heap_end = mempool;
+	}
+	prev_heap_end = heap_end;
+	heap_end += incr;
+
+	return (void *) prev_heap_end;
+}
+
+
+#if 0
 /* Heap limit returned from SYS_HEAPINFO Angel semihost call.  */
 uint __heap_limit = 0xcafedead;
 
@@ -573,6 +589,8 @@ _sbrk (ptrdiff_t incr)
 
   return (void *) prev_heap_end;
 }
+#endif
+
 
 extern void memset (struct stat *, int, unsigned int);
 
@@ -688,7 +706,7 @@ _times (struct tms * tp)
 int
 _isatty (int fd)
 {
-#ifdef ARM_RDI_MONITOR
+#if 0 //def ARM_RDI_MONITOR
   int fh = remap_handle (fd);
   return wrap (do_AngelSWI (AngelSWI_Reason_IsTTY, &fh));
 #else
