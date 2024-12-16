@@ -13,7 +13,7 @@ void	cmd_Files( void );
 void	ub_backspace(void);
 int		ub_inchar();
 int		ub_c2u(ushort *pwcs, const char *s, int n);
-static	int ub_putchar(int character);
+int     ub_putchar(int character);
 void	ub_outchar(uchar c);
 uchar	ub_breakcheck(void);
 

@@ -170,7 +170,7 @@ int ub_c2u(ushort *pwcs, const char *s, int n)
 	return count;
 }
 
-static int ub_putchar(int character)
+int ub_putchar(int character)
 {
 	CHAR16 ch[2]; /* This variable needs to be an array of 2 or else an extra space prints */
 	ub_c2u(ch,(char *)&character,1);

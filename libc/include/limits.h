@@ -18,7 +18,8 @@
 
 /* if do not have #include_next support, then we
    have to define the limits here. */
-# if !defined __GNUC__ || __GNUC__ < 2
+//# if !defined __GNUC__ || __GNUC__ < 2
+#if 1
 
 #  ifndef _LIMITS_H
 #   define _LIMITS_H	1
@@ -129,7 +130,14 @@
 
 #if defined __GNUC__ && !defined _GCC_LIMITS_H_
 /* `_GCC_LIMITS_H_' is what GCC's file defines.  */
-# include_next <limits.h>
+
+//FIXME
+// # include_next <limits.h>
+#ifndef LONG_MAX
+#define LONG_MAX 9223372036854775807L
+#endif
+
+
 #endif /* __GNUC__ && !_GCC_LIMITS_H_ */
 
 #ifndef _POSIX2_RE_DUP_MAX
