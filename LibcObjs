@@ -371,6 +371,7 @@ LibcObjs = \
 	libc/ctype/isalpha.o  \
 	libc/stdlib/mlock.o  \
 	libc/stdlib/malloc.o  \
+	libc/stdlib/realloc.o  \
 	libc/stdlib/_mallocr.o  \
 	libc/stdlib/system.o  \
 	libc/stdlib/rand_r.o  \

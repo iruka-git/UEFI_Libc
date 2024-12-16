@@ -50,13 +50,13 @@ int _write(void)		{return 0;}
 int abort(void)			{return 0;}
 int btowc(void)			{return 0;}
 int getenv(void)		{return 0;}
-//int malloc(void)		{return 0;}
 int nanf(void)			{return 0;}
-int realloc(void)		{return 0;}
 int environ(void)		{return 0;}
 
 
 /*
+int realloc(void)		{return 0;}
+int malloc(void)		{return 0;}
 int _malloc_r(void)		{return 0;}
 int _realloc_r(void)	{return 0;}
 int _free_r(void)		{return 0;}
