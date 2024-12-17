@@ -2,39 +2,38 @@
 #include <string.h>
 #include <malloc.h>
 
+#include <sys/unistd.h>
+
 #include "ub_util.h"
 
-char *itohex(char *buf,long hex)
+void logprint(char *mesg,char *file,int line)
 {
-	char *ret = buf;
-	int i,c;
-	for(i=0;i<32;i++) {
-		*buf++ = ' ';
+	char buf[1024];
+	if(mesg==NULL) {
+		mesg="";
 	}
-	
-	while(hex!=0) {
-		c=(hex & 0x0f);
-		if(c>=10) c=c+6;
-		*--buf = c+'0';
-		hex >>=4;
-		hex &= 0x7fffffffffffffff;
-	}
-	return ret;
+	sprintf(buf,"%s:%d: %s\n",file,line,mesg);
+	ub_puts(buf);
 }
 
 void   cmd_User( void )
 {
 	char buf[100];
 	int *p = malloc(0x1000);
-	ub_puts("malloc()= 0x");
-	ub_puts(itohex( buf,(long)p ));
-	ub_puts("\n");
-	
-	sprintf(buf,"hex = %lx\n",(long)p );
+	sprintf(buf,"malloc()= 0x%lx\n",(long)p );
 	ub_puts(buf);
 	
-	printf("HEX = %lx\n",(long)p );
+	_write(1,buf,6);
+	ub_puts("\n---\n");
+
+//	printf("HEX = %lx\n",(long)p );
+	putc('a',stdout);
+	putc('b',stdout);
+	putc('c',stdout);
+	fflush(stdout);
 	
+	ub_puts("\n===\n");
+
 }
 
 #if 0

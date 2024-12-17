@@ -4,23 +4,11 @@
 
 #include "ub_util.h"
 
-//#undef NULL
-//#include <string.h>
+EFI_SYSTEM_TABLE *global_eST = (void *) 0 ;
 
-#ifndef boolean
-#define boolean int
-#define true 1
-#define false 0
-#endif
-
-
-#define ZZ printmsg((uchar*)("ZZ:" XSTR(__LINE__)));
-
-boolean inhibitOutput = false;
-
-EFI_SYSTEM_TABLE *global_eST = (void *)0;
 
 void ub_outchar(uchar c);
+void cmd_User( void );
 
 int  ub_puts(char *s)
 {
@@ -57,7 +45,9 @@ EFI_STATUS efi_main(EFI_HANDLE image, EFI_SYSTEM_TABLE *sys_table)
 	global_eST = sys_table;
 	InitializeLib(image, sys_table);  // I need It.
 
-	basic_main();
+ZZ	cmd_User();
+	
+ZZ	basic_main();
 
 	return EFI_SUCCESS;
 }
@@ -166,7 +156,6 @@ int ub_putchar(int character)
 
 void ub_outchar(uchar c)
 {
-	if( inhibitOutput ) return;
 	if( c == '\n' ) {
 		ub_putchar( '\r' );
 	}

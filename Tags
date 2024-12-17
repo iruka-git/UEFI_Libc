@@ -1,427 +1,432 @@
-	libc/stdlib/_mallocr.c
-	libc/stdlib/reallocr.c
-	libc/stdlib/system.c
-	libc/stdlib/rand_r.c
-	libc/sys/x64uefi/syscalls.c
 #
-	libc/errno/errno.c
-	libc/misc/lock.c
-	libc/misc/__dprintf.c
-	libc/misc/fini.c
-	libc/misc/init.c
-	libc/misc/unctrl.c
-	libc/misc/ffs.c
-	libc/reent/linkr.c
-	libc/reent/mkdirr.c
-	libc/reent/isattyr.c
-	libc/reent/reent.c
-	libc/reent/fcntlr.c
-	libc/reent/lseekr.c
-	libc/reent/renamer.c
-	libc/reent/sbrkr.c
-	libc/reent/closer.c
-	libc/reent/open64r.c
-	libc/reent/getentropyr.c
-	libc/reent/fstatr.c
-	libc/reent/lseek64r.c
-	libc/reent/readr.c
-	libc/reent/openr.c
-	libc/reent/fstat64r.c
-	libc/reent/signalr.c
-	libc/reent/unlinkr.c
-	libc/reent/timesr.c
-	libc/reent/writer.c
-	libc/reent/impure.c
-	libc/reent/execr.c
-	libc/reent/stat64r.c
-	libc/reent/gettimeofdayr.c
-	libc/reent/getreent.c
-	libc/reent/statr.c
-	libc/string/wcsncmp.c
-	libc/string/strlcat.c
-	libc/string/wcsrchr.c
-	libc/string/strcasestr.c
-	libc/string/wcstok.c
-	libc/string/strcasecmp.c
-	libc/string/wcsncasecmp.c
-	libc/string/wcsspn.c
-	libc/string/strnlen.c
-	libc/string/wcpncpy.c
-	libc/string/wcslen.c
-	libc/string/wcswidth.c
-	libc/string/strchrnul.c
-	libc/string/wcschr.c
-	libc/string/strtok_r.c
-	libc/string/wcsxfrm.c
-	libc/string/bcmp.c
-	libc/string/rawmemchr.c
-	libc/string/stpcpy.c
-	libc/string/strsep.c
-	libc/string/memchr.c
-	libc/string/xpg_strerror_r.c
-	libc/string/strdup.c
-	libc/string/wcsncasecmp_l.c
-	libc/string/flsll.c
-	libc/string/strerror_r.c
-	libc/string/wcsdup.c
-	libc/string/ffsll.c
-	libc/string/strtok.c
-	libc/string/rindex.c
-	libc/string/wcslcpy.c
-	libc/string/strlen.c
-	libc/string/strstr.c
-	libc/string/wcscspn.c
-	libc/string/flsl.c
-	libc/string/mempcpy.c
-	libc/string/wcscmp.c
-	libc/string/swab.c
-	libc/string/strndup_r.c
-	libc/string/wcpcpy.c
-	libc/string/strcoll.c
-	libc/string/strncat.c
-	libc/string/bcopy.c
-	libc/string/strncpy.c
-	libc/string/strdup_r.c
-	libc/string/gnu_basename.c
-	libc/string/strcspn.c
-	libc/string/wcsxfrm_l.c
-	libc/string/explicit_bzero.c
-	libc/string/strlcpy.c
-	libc/string/wmemcpy.c
-	libc/string/memcmp.c
-	libc/string/wcscat.c
-	libc/string/strncmp.c
-	libc/string/strcoll_l.c
-	libc/string/wcwidth.c
-	libc/string/strverscmp.c
-	libc/string/strxfrm_l.c
-	libc/string/wmemcmp.c
-	libc/string/wcsnlen.c
-	libc/string/strrchr.c
-	libc/string/fls.c
-	libc/string/strcmp.c
-	libc/string/strnstr.c
-	libc/string/wcscoll_l.c
-	libc/string/wcsncpy.c
-	libc/string/strlwr.c
-	libc/string/bzero.c
-	libc/string/wmemmove.c
-	libc/string/wcscasecmp.c
-	libc/string/wcscpy.c
-	libc/string/strcpy.c
-	libc/string/index.c
-	libc/string/timingsafe_bcmp.c
-	libc/string/strerror.c
-	libc/string/wmemchr.c
-	libc/string/wmempcpy.c
-	libc/string/ffsl.c
-	libc/string/wcspbrk.c
-	libc/string/strncasecmp.c
-	libc/string/strncasecmp_l.c
-	libc/string/strsignal.c
-	libc/string/wcsncat.c
-	libc/string/wcslcat.c
-	libc/string/wcsstr.c
-	libc/string/strcasecmp_l.c
-	libc/string/memrchr.c
-	libc/string/timingsafe_memcmp.c
-	libc/string/strxfrm.c
-	libc/string/wmemset.c
-	libc/string/strupr.c
-	libc/string/wcscoll.c
-	libc/string/strchr.c
-	libc/string/memccpy.c
-	libc/string/memmem.c
-	libc/string/memmove.c
-	libc/string/wcscasecmp_l.c
-	libc/string/strndup.c
-	libc/string/stpncpy.c
-	libc/string/u_strerr.c
-	libc/string/strcat.c
-	libc/string/strpbrk.c
-	libc/string/strspn.c
-	libc/stdio/fileno.c
-	libc/stdio/feof_u.c
-	libc/stdio/remove.c
-	libc/stdio/fputws_u.c
-	libc/stdio/iprintf.c
-	libc/stdio/snprintf.c
-	libc/stdio/getchar_u.c
-	libc/stdio/fseeko.c
-	libc/stdio/setlinebuf.c
-	libc/stdio/ungetwc.c
-	libc/stdio/freopen.c
-	libc/stdio/fsetlocking.c
-	libc/stdio/fclose.c
-	libc/stdio/putw.c
-	libc/stdio/rewind.c
-	libc/stdio/fsetpos.c
-	libc/stdio/sccl.c
-	libc/stdio/setbuffer.c
-	libc/stdio/getwc.c
-	libc/stdio/putc.c
-	libc/stdio/vdprintf.c
-	libc/stdio/mktemp.c
-	libc/stdio/fflush_u.c
-	libc/stdio/vsnprintf.c
-	libc/stdio/diprintf.c
-	libc/stdio/vprintf.c
-	libc/stdio/asiprintf.c
-	libc/stdio/svfscanf.c
-	libc/stdio/svfwscanf.c
-	libc/stdio/svfiscanf.c
-	libc/stdio/makebuf.c
-	libc/stdio/fscanf.c
-	libc/stdio/getdelim.c
-	libc/stdio/scanf.c
-	libc/stdio/wprintf.c
-	libc/stdio/ssputws_r.c
-	libc/stdio/fvwrite.c
-	libc/stdio/getwchar_u.c
-	libc/stdio/perror.c
-	libc/stdio/viscanf.c
-	libc/stdio/fwalk.c
-	libc/stdio/sniprintf.c
-	libc/stdio/putchar_u.c
-	libc/stdio/printf.c
-	libc/stdio/fgets.c
-	libc/stdio/tmpfile.c
-	libc/stdio/fgetws_u.c
-	libc/stdio/iscanf.c
-	libc/stdio/fiprintf.c
-	libc/stdio/fputc.c
-	libc/stdio/fgetc_u.c
-	libc/stdio/fputs.c
-	libc/stdio/vasprintf.c
-	libc/stdio/vfscanf.c
-	libc/stdio/fgetwc.c
-	libc/stdio/fputs_u.c
-	libc/stdio/feof.c
-	libc/stdio/fprintf.c
-	libc/stdio/vasnprintf.c
-	libc/stdio/sprintf.c
-	libc/stdio/fwrite_u.c
-	libc/stdio/puts.c
-	libc/stdio/fwscanf.c
-	libc/stdio/putwchar_u.c
-	libc/stdio/open_memstream.c
-	libc/stdio/clearerr_u.c
-	libc/stdio/stdio.c
-	libc/stdio/fwide.c
-	libc/stdio/swscanf.c
-	libc/stdio/fgetc.c
-	libc/stdio/getchar.c
-	libc/stdio/fcloseall.c
-	libc/stdio/setbuf.c
-	libc/stdio/fmemopen.c
-	libc/stdio/fread.c
-	libc/stdio/viprintf.c
-	libc/stdio/siprintf.c
-	libc/stdio/vdiprintf.c
-	libc/stdio/ferror.c
-	libc/stdio/putc_u.c
-	libc/stdio/getc_u.c
-	libc/stdio/fputc_u.c
-	libc/stdio/vsiscanf.c
-	libc/stdio/rename.c
-	libc/stdio/vwprintf.c
-	libc/stdio/putwc.c
-	libc/stdio/svfiwscanf.c
-	libc/stdio/wbufw.c
-	libc/stdio/sprint_r.c
-	libc/stdio/ssprint_r.c
-	libc/stdio/fread_u.c
-	libc/stdio/sfputws_r.c
-	libc/stdio/vfprintf.c
-	libc/stdio/wscanf.c
-	libc/stdio/setvbuf.c
-	libc/stdio/funopen.c
-	libc/stdio/sswprint_r.c
-	libc/stdio/gets.c
-	libc/stdio/vfiwscanf.c
-	libc/stdio/vasniprintf.c
-	libc/stdio/asnprintf.c
-	libc/stdio/fileno_u.c
-	libc/stdio/fgetws.c
-	libc/stdio/getw.c
-	libc/stdio/stdio_ext.c
-	libc/stdio/fseek.c
-	libc/stdio/ssputs_r.c
-	libc/stdio/tmpnam.c
-	libc/stdio/getc.c
-	libc/stdio/fwprintf.c
-	libc/stdio/ftello.c
-	libc/stdio/fputwc.c
-	libc/stdio/swprint_r.c
-	libc/stdio/vscanf.c
-	libc/stdio/vsscanf.c
-	libc/stdio/vfiscanf.c
-	libc/stdio/ferror_u.c
-	libc/stdio/sscanf.c
-	libc/stdio/fpurge.c
-	libc/stdio/vswscanf.c
-	libc/stdio/fgetpos.c
-	libc/stdio/dprintf.c
-	libc/stdio/rget.c
-	libc/stdio/ftell.c
-	libc/stdio/vfiwprintf.c
-	libc/stdio/svfiprintf.c
-	libc/stdio/flags.c
-	libc/stdio/asprintf.c
-	libc/stdio/putwc_u.c
-	libc/stdio/fwrite.c
-	libc/stdio/vsiprintf.c
-	libc/stdio/swprintf.c
-	libc/stdio/fputws.c
-	libc/stdio/vasiprintf.c
-	libc/stdio/vfiprintf.c
-	libc/stdio/clearerr.c
-	libc/stdio/svfwprintf.c
-	libc/stdio/vfwprintf.c
-	libc/stdio/refill.c
-	libc/stdio/wbuf.c
-	libc/stdio/putwchar.c
-	libc/stdio/fopen.c
-	libc/stdio/vwscanf.c
-	libc/stdio/fgets_u.c
-	libc/stdio/vsniprintf.c
-	libc/stdio/fgetwc_u.c
-	libc/stdio/asniprintf.c
-	libc/stdio/siscanf.c
-	libc/stdio/sfputs_r.c
-	libc/stdio/vswprintf.c
-	libc/stdio/svfprintf.c
-	libc/stdio/getwchar.c
-	libc/stdio/fiscanf.c
-	libc/stdio/fputwc_u.c
-	libc/stdio/fopencookie.c
-	libc/stdio/svfiwprintf.c
-	libc/stdio/fflush.c
-	libc/stdio/vsprintf.c
-	libc/stdio/putchar.c
-	libc/stdio/fdopen.c
-	libc/stdio/wsetup.c
-	libc/stdio/getline.c
-	libc/stdio/getwc_u.c
-	libc/stdio/ungetc.c
-	libc/ctype/iswdigit.c
-	libc/ctype/iswblank_l.c
-	libc/ctype/iswprint_l.c
-	libc/ctype/islower_l.c
-	libc/ctype/categories.c
-	libc/ctype/toascii_l.c
-	libc/ctype/iswupper.c
-	libc/ctype/iswgraph.c
-	libc/ctype/isupper.c
-	libc/ctype/ctype_.c
-	libc/ctype/towlower.c
-	libc/ctype/iswctype_l.c
-	libc/ctype/iswctype.c
-	libc/ctype/iswalpha.c
-	libc/ctype/iswcntrl.c
-	libc/ctype/isxdigit_l.c
-	libc/ctype/toupper.c
-	libc/ctype/islower.c
-	libc/ctype/isdigit.c
-	libc/ctype/iswupper_l.c
-	libc/ctype/wctype_l.c
-	libc/ctype/ispunct.c
-	libc/ctype/towctrans.c
-	libc/ctype/iswlower.c
-	libc/ctype/tolower_l.c
-	libc/ctype/isspace.c
-	libc/ctype/toascii.c
-	libc/ctype/iswalnum.c
-	libc/ctype/towupper_l.c
-	libc/ctype/isalnum_l.c
-	libc/ctype/iswpunct_l.c
-	libc/ctype/iswalpha_l.c
-	libc/ctype/isxdigit.c
-	libc/ctype/iswprint.c
-	libc/ctype/iswpunct.c
-	libc/ctype/isblank.c
-	libc/ctype/iswxdigit_l.c
-	libc/ctype/isalnum.c
-	libc/ctype/iswxdigit.c
-	libc/ctype/towctrans_l.c
-	libc/ctype/isprint.c
-	libc/ctype/iswblank.c
-	libc/ctype/iswcntrl_l.c
-	libc/ctype/isalpha_l.c
-	libc/ctype/wctrans_l.c
-	libc/ctype/iscntrl.c
-	libc/ctype/iscntrl_l.c
-	libc/ctype/isspace_l.c
-	libc/ctype/toupper_l.c
-	libc/ctype/iswlower_l.c
-	libc/ctype/isdigit_l.c
-	libc/ctype/ispunct_l.c
-	libc/ctype/isprint_l.c
-	libc/ctype/wctype.c
-	libc/ctype/jp2uc.c
-	libc/ctype/towlower_l.c
-	libc/ctype/iswspace_l.c
-	libc/ctype/isascii_l.c
-	libc/ctype/wctrans.c
-	libc/ctype/isascii.c
-	libc/ctype/iswdigit_l.c
-	libc/ctype/iswgraph_l.c
-	libc/ctype/isupper_l.c
-	libc/ctype/iswalnum_l.c
-	libc/ctype/towupper.c
-	libc/ctype/iswspace.c
-	libc/ctype/isblank_l.c
-	libc/ctype/tolower.c
-	libc/ctype/isalpha.c
-	libc/stdlib/_mallocr.c
-	libc/stdlib/reallocr.c
-	libc/stdlib/system.c
-	libc/stdlib/rand_r.c
-	libc/sys/x64uefi/syscalls.c
+libc/include/uefi/newlib.h
+ub_test.c
+libc/stdio/putc.c
+libc/stdio/printf.c
+libc/stdio/vfprintf.c
+libc/stdio/putchar.c
+libc/sys/x64uefi/syscalls.c
+libc/stdlib/_mallocr.c
+libc/stdlib/reallocr.c
+libc/stdlib/system.c
+libc/stdlib/rand_r.c
+#
+libc/errno/errno.c
+libc/misc/lock.c
+libc/misc/__dprintf.c
+libc/misc/fini.c
+libc/misc/init.c
+libc/misc/unctrl.c
+libc/misc/ffs.c
+libc/reent/linkr.c
+libc/reent/mkdirr.c
+libc/reent/isattyr.c
+libc/reent/reent.c
+libc/reent/fcntlr.c
+libc/reent/lseekr.c
+libc/reent/renamer.c
+libc/reent/sbrkr.c
+libc/reent/closer.c
+libc/reent/open64r.c
+libc/reent/getentropyr.c
+libc/reent/fstatr.c
+libc/reent/lseek64r.c
+libc/reent/readr.c
+libc/reent/openr.c
+libc/reent/fstat64r.c
+libc/reent/signalr.c
+libc/reent/unlinkr.c
+libc/reent/timesr.c
+libc/reent/writer.c
+libc/reent/impure.c
+libc/reent/execr.c
+libc/reent/stat64r.c
+libc/reent/gettimeofdayr.c
+libc/reent/getreent.c
+libc/reent/statr.c
+libc/string/wcsncmp.c
+libc/string/strlcat.c
+libc/string/wcsrchr.c
+libc/string/strcasestr.c
+libc/string/wcstok.c
+libc/string/strcasecmp.c
+libc/string/wcsncasecmp.c
+libc/string/wcsspn.c
+libc/string/strnlen.c
+libc/string/wcpncpy.c
+libc/string/wcslen.c
+libc/string/wcswidth.c
+libc/string/strchrnul.c
+libc/string/wcschr.c
+libc/string/strtok_r.c
+libc/string/wcsxfrm.c
+libc/string/bcmp.c
+libc/string/rawmemchr.c
+libc/string/stpcpy.c
+libc/string/strsep.c
+libc/string/memchr.c
+libc/string/xpg_strerror_r.c
+libc/string/strdup.c
+libc/string/wcsncasecmp_l.c
+libc/string/flsll.c
+libc/string/strerror_r.c
+libc/string/wcsdup.c
+libc/string/ffsll.c
+libc/string/strtok.c
+libc/string/rindex.c
+libc/string/wcslcpy.c
+libc/string/strlen.c
+libc/string/strstr.c
+libc/string/wcscspn.c
+libc/string/flsl.c
+libc/string/mempcpy.c
+libc/string/wcscmp.c
+libc/string/swab.c
+libc/string/strndup_r.c
+libc/string/wcpcpy.c
+libc/string/strcoll.c
+libc/string/strncat.c
+libc/string/bcopy.c
+libc/string/strncpy.c
+libc/string/strdup_r.c
+libc/string/gnu_basename.c
+libc/string/strcspn.c
+libc/string/wcsxfrm_l.c
+libc/string/explicit_bzero.c
+libc/string/strlcpy.c
+libc/string/wmemcpy.c
+libc/string/memcmp.c
+libc/string/wcscat.c
+libc/string/strncmp.c
+libc/string/strcoll_l.c
+libc/string/wcwidth.c
+libc/string/strverscmp.c
+libc/string/strxfrm_l.c
+libc/string/wmemcmp.c
+libc/string/wcsnlen.c
+libc/string/strrchr.c
+libc/string/fls.c
+libc/string/strcmp.c
+libc/string/strnstr.c
+libc/string/wcscoll_l.c
+libc/string/wcsncpy.c
+libc/string/strlwr.c
+libc/string/bzero.c
+libc/string/wmemmove.c
+libc/string/wcscasecmp.c
+libc/string/wcscpy.c
+libc/string/strcpy.c
+libc/string/index.c
+libc/string/timingsafe_bcmp.c
+libc/string/strerror.c
+libc/string/wmemchr.c
+libc/string/wmempcpy.c
+libc/string/ffsl.c
+libc/string/wcspbrk.c
+libc/string/strncasecmp.c
+libc/string/strncasecmp_l.c
+libc/string/strsignal.c
+libc/string/wcsncat.c
+libc/string/wcslcat.c
+libc/string/wcsstr.c
+libc/string/strcasecmp_l.c
+libc/string/memrchr.c
+libc/string/timingsafe_memcmp.c
+libc/string/strxfrm.c
+libc/string/wmemset.c
+libc/string/strupr.c
+libc/string/wcscoll.c
+libc/string/strchr.c
+libc/string/memccpy.c
+libc/string/memmem.c
+libc/string/memmove.c
+libc/string/wcscasecmp_l.c
+libc/string/strndup.c
+libc/string/stpncpy.c
+libc/string/u_strerr.c
+libc/string/strcat.c
+libc/string/strpbrk.c
+libc/string/strspn.c
+libc/stdio/fileno.c
+libc/stdio/feof_u.c
+libc/stdio/remove.c
+libc/stdio/fputws_u.c
+libc/stdio/iprintf.c
+libc/stdio/snprintf.c
+libc/stdio/getchar_u.c
+libc/stdio/fseeko.c
+libc/stdio/setlinebuf.c
+libc/stdio/ungetwc.c
+libc/stdio/freopen.c
+libc/stdio/fsetlocking.c
+libc/stdio/fclose.c
+libc/stdio/putw.c
+libc/stdio/rewind.c
+libc/stdio/fsetpos.c
+libc/stdio/sccl.c
+libc/stdio/setbuffer.c
+libc/stdio/getwc.c
+libc/stdio/vdprintf.c
+libc/stdio/mktemp.c
+libc/stdio/fflush_u.c
+libc/stdio/vsnprintf.c
+libc/stdio/diprintf.c
+libc/stdio/vprintf.c
+libc/stdio/asiprintf.c
+libc/stdio/svfscanf.c
+libc/stdio/svfwscanf.c
+libc/stdio/svfiscanf.c
+libc/stdio/makebuf.c
+libc/stdio/fscanf.c
+libc/stdio/getdelim.c
+libc/stdio/scanf.c
+libc/stdio/wprintf.c
+libc/stdio/ssputws_r.c
+libc/stdio/fvwrite.c
+libc/stdio/getwchar_u.c
+libc/stdio/perror.c
+libc/stdio/viscanf.c
+libc/stdio/fwalk.c
+libc/stdio/sniprintf.c
+libc/stdio/putchar_u.c
+libc/stdio/printf.c
+libc/stdio/fgets.c
+libc/stdio/tmpfile.c
+libc/stdio/fgetws_u.c
+libc/stdio/iscanf.c
+libc/stdio/fiprintf.c
+libc/stdio/fputc.c
+libc/stdio/fgetc_u.c
+libc/stdio/fputs.c
+libc/stdio/vasprintf.c
+libc/stdio/vfscanf.c
+libc/stdio/fgetwc.c
+libc/stdio/fputs_u.c
+libc/stdio/feof.c
+libc/stdio/fprintf.c
+libc/stdio/vasnprintf.c
+libc/stdio/sprintf.c
+libc/stdio/fwrite_u.c
+libc/stdio/puts.c
+libc/stdio/fwscanf.c
+libc/stdio/putwchar_u.c
+libc/stdio/open_memstream.c
+libc/stdio/clearerr_u.c
+libc/stdio/stdio.c
+libc/stdio/fwide.c
+libc/stdio/swscanf.c
+libc/stdio/fgetc.c
+libc/stdio/getchar.c
+libc/stdio/fcloseall.c
+libc/stdio/setbuf.c
+libc/stdio/fmemopen.c
+libc/stdio/fread.c
+libc/stdio/viprintf.c
+libc/stdio/siprintf.c
+libc/stdio/vdiprintf.c
+libc/stdio/ferror.c
+libc/stdio/putc_u.c
+libc/stdio/getc_u.c
+libc/stdio/fputc_u.c
+libc/stdio/vsiscanf.c
+libc/stdio/rename.c
+libc/stdio/vwprintf.c
+libc/stdio/putwc.c
+libc/stdio/svfiwscanf.c
+libc/stdio/wbufw.c
+libc/stdio/sprint_r.c
+libc/stdio/ssprint_r.c
+libc/stdio/fread_u.c
+libc/stdio/sfputws_r.c
+libc/stdio/wscanf.c
+libc/stdio/setvbuf.c
+libc/stdio/funopen.c
+libc/stdio/sswprint_r.c
+libc/stdio/gets.c
+libc/stdio/vfiwscanf.c
+libc/stdio/vasniprintf.c
+libc/stdio/asnprintf.c
+libc/stdio/fileno_u.c
+libc/stdio/fgetws.c
+libc/stdio/getw.c
+libc/stdio/stdio_ext.c
+libc/stdio/fseek.c
+libc/stdio/ssputs_r.c
+libc/stdio/tmpnam.c
+libc/stdio/getc.c
+libc/stdio/fwprintf.c
+libc/stdio/ftello.c
+libc/stdio/fputwc.c
+libc/stdio/swprint_r.c
+libc/stdio/vscanf.c
+libc/stdio/vsscanf.c
+libc/stdio/vfiscanf.c
+libc/stdio/ferror_u.c
+libc/stdio/sscanf.c
+libc/stdio/fpurge.c
+libc/stdio/vswscanf.c
+libc/stdio/fgetpos.c
+libc/stdio/dprintf.c
+libc/stdio/rget.c
+libc/stdio/ftell.c
+libc/stdio/vfiwprintf.c
+libc/stdio/svfiprintf.c
+libc/stdio/flags.c
+libc/stdio/asprintf.c
+libc/stdio/putwc_u.c
+libc/stdio/fwrite.c
+libc/stdio/vsiprintf.c
+libc/stdio/swprintf.c
+libc/stdio/fputws.c
+libc/stdio/vasiprintf.c
+libc/stdio/vfiprintf.c
+libc/stdio/clearerr.c
+libc/stdio/svfwprintf.c
+libc/stdio/vfwprintf.c
+libc/stdio/refill.c
+libc/stdio/wbuf.c
+libc/stdio/putwchar.c
+libc/stdio/fopen.c
+libc/stdio/vwscanf.c
+libc/stdio/fgets_u.c
+libc/stdio/vsniprintf.c
+libc/stdio/fgetwc_u.c
+libc/stdio/asniprintf.c
+libc/stdio/siscanf.c
+libc/stdio/sfputs_r.c
+libc/stdio/vswprintf.c
+libc/stdio/svfprintf.c
+libc/stdio/getwchar.c
+libc/stdio/fiscanf.c
+libc/stdio/fputwc_u.c
+libc/stdio/fopencookie.c
+libc/stdio/svfiwprintf.c
+libc/stdio/fflush.c
+libc/stdio/vsprintf.c
+libc/stdio/putchar.c
+libc/stdio/fdopen.c
+libc/stdio/wsetup.c
+libc/stdio/getline.c
+libc/stdio/getwc_u.c
+libc/stdio/ungetc.c
+libc/ctype/iswdigit.c
+libc/ctype/iswblank_l.c
+libc/ctype/iswprint_l.c
+libc/ctype/islower_l.c
+libc/ctype/categories.c
+libc/ctype/toascii_l.c
+libc/ctype/iswupper.c
+libc/ctype/iswgraph.c
+libc/ctype/isupper.c
+libc/ctype/ctype_.c
+libc/ctype/towlower.c
+libc/ctype/iswctype_l.c
+libc/ctype/iswctype.c
+libc/ctype/iswalpha.c
+libc/ctype/iswcntrl.c
+libc/ctype/isxdigit_l.c
+libc/ctype/toupper.c
+libc/ctype/islower.c
+libc/ctype/isdigit.c
+libc/ctype/iswupper_l.c
+libc/ctype/wctype_l.c
+libc/ctype/ispunct.c
+libc/ctype/towctrans.c
+libc/ctype/iswlower.c
+libc/ctype/tolower_l.c
+libc/ctype/isspace.c
+libc/ctype/toascii.c
+libc/ctype/iswalnum.c
+libc/ctype/towupper_l.c
+libc/ctype/isalnum_l.c
+libc/ctype/iswpunct_l.c
+libc/ctype/iswalpha_l.c
+libc/ctype/isxdigit.c
+libc/ctype/iswprint.c
+libc/ctype/iswpunct.c
+libc/ctype/isblank.c
+libc/ctype/iswxdigit_l.c
+libc/ctype/isalnum.c
+libc/ctype/iswxdigit.c
+libc/ctype/towctrans_l.c
+libc/ctype/isprint.c
+libc/ctype/iswblank.c
+libc/ctype/iswcntrl_l.c
+libc/ctype/isalpha_l.c
+libc/ctype/wctrans_l.c
+libc/ctype/iscntrl.c
+libc/ctype/iscntrl_l.c
+libc/ctype/isspace_l.c
+libc/ctype/toupper_l.c
+libc/ctype/iswlower_l.c
+libc/ctype/isdigit_l.c
+libc/ctype/ispunct_l.c
+libc/ctype/isprint_l.c
+libc/ctype/wctype.c
+libc/ctype/jp2uc.c
+libc/ctype/towlower_l.c
+libc/ctype/iswspace_l.c
+libc/ctype/isascii_l.c
+libc/ctype/wctrans.c
+libc/ctype/isascii.c
+libc/ctype/iswdigit_l.c
+libc/ctype/iswgraph_l.c
+libc/ctype/isupper_l.c
+libc/ctype/iswalnum_l.c
+libc/ctype/towupper.c
+libc/ctype/iswspace.c
+libc/ctype/isblank_l.c
+libc/ctype/tolower.c
+libc/ctype/isalpha.c
+libc/stdlib/_mallocr.c
+libc/stdlib/reallocr.c
+libc/stdlib/system.c
+libc/stdlib/rand_r.c
+libc/sys/x64uefi/syscalls.c
 
 #
-#	libc/stdio/nano-svfprintf.c
-#	libc/stdio/nano-vfprintf_i.c
+#libc/stdio/nano-svfprintf.c
+#libc/stdio/nano-vfprintf_i.c
 #
-#	libc/stdlib/nano-mallocr.c \
-#	libc/string/strerror.c \
+#libc/stdlib/nano-mallocr.c \
+#libc/string/strerror.c \
 
-#	libc/stdio/nano-vfscanf.c
-#	libc/stdio/nano-vfscanf_i.c
-#	libc/stdio/nano-svfscanf.c
-#	libc/stdio/nano-vfprintf.c
-#	libc/stdio/nano-vfprintf_float.c
-#	libc/stdio/nano-vfscanf_float.c
+#libc/stdio/nano-vfscanf.c
+#libc/stdio/nano-vfscanf_i.c
+#libc/stdio/nano-svfscanf.c
+#libc/stdio/nano-vfprintf.c
+#libc/stdio/nano-vfprintf_float.c
+#libc/stdio/nano-vfscanf_float.c
 
 
 # libefi.soと二重定義.
-#	libc/string/memset.c \
-#	libc/string/memcpy.c \
+#libc/string/memset.c \
+#libc/string/memcpy.c \
 
 # コンパイル通らない・・・
-#	libc/stdio/findfp.c
-#	libc/stdio/vfwscanf.c
+#libc/stdio/findfp.c
+#libc/stdio/vfwscanf.c
 
-#	libc/stdio64/fopen64.c
-#	libc/stdio64/fseeko64.c
-#	libc/stdio64/freopen64.c
-#	libc/stdio64/ftello64.c
-#	libc/stdio64/fdopen64.c
-#	libc/stdio64/tmpfile64.c
-#	libc/stdio64/stdio64.c
-#	libc/stdio64/fsetpos64.c
-#	libc/stdio64/fgetpos64.c
+#libc/stdio64/fopen64.c
+#libc/stdio64/fseeko64.c
+#libc/stdio64/freopen64.c
+#libc/stdio64/ftello64.c
+#libc/stdio64/fdopen64.c
+#libc/stdio64/tmpfile64.c
+#libc/stdio64/stdio64.c
+#libc/stdio64/fsetpos64.c
+#libc/stdio64/fgetpos64.c
 #
-#	libc/unix/basename.c
-#	libc/unix/sigset.c
-#	libc/unix/pwrite.c
-#	libc/unix/pread.c
-#	libc/unix/getpwent.c
-#	libc/unix/getlogin.c
-#	libc/unix/getpass.c
-#	libc/unix/dirname.c
-#	libc/unix/getcwd.c
-#	libc/unix/ttyname_r.c
-#	libc/unix/ttyname.c
-#	libc/unix/getut.c
+#libc/unix/basename.c
+#libc/unix/sigset.c
+#libc/unix/pwrite.c
+#libc/unix/pread.c
+#libc/unix/getpwent.c
+#libc/unix/getlogin.c
+#libc/unix/getpass.c
+#libc/unix/dirname.c
+#libc/unix/getcwd.c
+#libc/unix/ttyname_r.c
+#libc/unix/ttyname.c
+#libc/unix/getut.c
 #

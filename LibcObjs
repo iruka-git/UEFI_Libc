@@ -300,6 +300,8 @@ LibcObjs = \
 	libc/stdio/getline.o  \
 	libc/stdio/getwc_u.o  \
 	libc/stdio/ungetc.o  \
+	libc/stdio/findfp.o  \
+	libc/stdio/vfwscanf.o  \
 	libc/ctype/iswdigit.o  \
 	libc/ctype/iswblank_l.o  \
 	libc/ctype/iswprint_l.o  \
@@ -381,6 +383,12 @@ LibcObjs = \
 	libc/stdlib/__call_atexit.o  \
 	libc/sys/x64uefi/syscalls.o  \
 
+#	libc/stdlib/dtoa.o  \
+#	libc/stdlib/utoa.o  \
+#	libc/stdlib/strtoll.o  \
+#	libc/stdlib/strtoull.o  \
+#	libc/stdlib/vallocr.o  \
+
 #
 #	libc/stdio/nano-svfprintf.o  \
 #	libc/stdio/nano-vfprintf_i.o  \
@@ -402,8 +410,6 @@ LibcObjs = \
 #	libc/string/memcpy.o \
 
 # コンパイル通らない・・・
-#	libc/stdio/findfp.o  \
-#	libc/stdio/vfwscanf.o  \
 
 #	libc/stdio64/fopen64.o  \
 #	libc/stdio64/fseeko64.o  \

@@ -13,4 +13,10 @@ typedef unsigned int wint_t;
 
 #define _LDBL_EQ_DBL
 
+void logprint(char *mesg,char *file,int line);
+
+#define ZZ  logprint("ZZ:",__FILE__,__LINE__);
+
+
+
 #endif //_LIBC_NEWLIB_H_

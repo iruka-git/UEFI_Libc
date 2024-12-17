@@ -70,8 +70,6 @@ typedef unsigned int  uint;
 typedef unsigned short ushort;
 typedef uchar    byte;
 
-#define ZZ printmsg((uchar*)("ZZ:" XSTR(__LINE__)));
-
 void debug();
 void ub_backspace(void);
 

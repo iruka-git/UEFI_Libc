@@ -2,29 +2,13 @@
 #include <stdio.h>
 #include <limits.h>
 
-
-
-
-//-----------------------
-//extern 
-__FILE __sf[3];
-
-//extern 
-void (*__stdio_exit_handler) (void);
-
-//extern 
-struct _glue __sglue;
-
-//-----------------------
-//
 int __global_locale(void)	{return 0;}
 int __locale_mb_cur_max(void)	{return 0;}
-int __sfp(void)			{return 0;}
-int __sfp_lock_acquire(void)	{return 0;}
-int __sfp_lock_release(void)	{return 0;}
-int __sinit(void)		{return 0;}
-int __svfwscanf_r(void)	{return 0;}
+int _strtod_r(void)		{return 0;}
+int _strtol_r(void)		{return 0;}
+int _strtoul_r(void)	{return 0;}
 int _dtoa_r(void)		{return 0;}
+
 int _execve(void)		{return 0;}
 int _fcntl(void)		{return 0;}
 int _fork(void)			{return 0;}
@@ -37,11 +21,7 @@ int _mbrtowc_r(void)	{return 0;}
 int _mkdir(void)		{return 0;}
 int _stat(void)			{return 0;}
 int _stat64(void)		{return 0;}
-int _strtod_r(void)		{return 0;}
-int _strtol_r(void)		{return 0;}
-int _strtoul_r(void)	{return 0;}
 int _uc2jp_l(void)		{return 0;}
-int _vfwscanf_r(void)	{return 0;}
 int _wait(void)			{return 0;}
 int _wcrtomb_r(void)	{return 0;}
 int _wcsrtombs_r(void)	{return 0;}
@@ -51,6 +31,15 @@ int getenv(void)		{return 0;}
 int nanf(void)			{return 0;}
 int environ(void)		{return 0;}
 
+
+/*
+int __sfp(void)			{return 0;}
+int __sfp_lock_acquire(void)	{return 0;}
+int __sfp_lock_release(void)	{return 0;}
+int __sinit(void)		{return 0;}
+int __svfwscanf_r(void)	{return 0;}
+int _vfwscanf_r(void)	{return 0;}
+*/
 
 /*
 int _sbrk(void)			{return 0;}
