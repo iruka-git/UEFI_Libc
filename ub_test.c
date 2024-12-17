@@ -26,12 +26,12 @@ void   cmd_User( void )
 	_write(1,buf,6);
 	ub_puts("\n---\n");
 
-//	printf("HEX = %lx\n",(long)p );
-	putc('a',stdout);
+	printf("HEX = %lx\n",(long)p );
+/*	putc('a',stdout);
 	putc('b',stdout);
 	putc('c',stdout);
 	fflush(stdout);
-	
+*/	
 	ub_puts("\n===\n");
 
 }

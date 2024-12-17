@@ -12,14 +12,11 @@ int _dtoa_r(void)		{return 0;}
 int _execve(void)		{return 0;}
 int _fcntl(void)		{return 0;}
 int _fork(void)			{return 0;}
-int _fstat(void)		{return 0;}
 int _getentropy(void)	{return 0;}
 int _jp2uc_l(void)		{return 0;}
-int _link(void)			{return 0;}
 int _localeconv_r(void)	{return 0;}
 int _mbrtowc_r(void)	{return 0;}
 int _mkdir(void)		{return 0;}
-int _stat(void)			{return 0;}
 int _stat64(void)		{return 0;}
 int _uc2jp_l(void)		{return 0;}
 int _wait(void)			{return 0;}
@@ -54,6 +51,9 @@ int _open(void)			{return 0;}
 int _read(void)			{return 0;}
 int _close(void)		{return 0;}
 int _isatty(void)		{return 0;}
+int _fstat(void)		{return 0;}
+int _stat(void)			{return 0;}
+int _link(void)			{return 0;}
 int _unlink(void)		{return 0;}
 int _gettimeofday(void)	{return 0;}
 int _times(void)		{return 0;}

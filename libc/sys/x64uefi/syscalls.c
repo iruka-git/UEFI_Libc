@@ -17,41 +17,37 @@
 #include <sys/wait.h>
 #include "swi.h"
 
-#define ARM_RDI_MONITOR
-
 /* Forward prototypes.  */
-int	_system		(const char *);
-int	_rename		(const char *, const char *);
-int	_isatty		(int);
+int	_system			(const char *);
+int	_rename			(const char *, const char *);
+int	_isatty			(int);
 clock_t _times		(struct tms *);
 int	_gettimeofday	(struct timeval *, void *);
 void	_raise		(void);
-int	_unlink		(const char *);
-int	_link		(const char *, const char *);
-int	_stat		(const char *, struct stat *);
-int	_fstat		(int, struct stat *);
+int	_unlink			(const char *);
+int	_link			(const char *, const char *);
+int	_stat			(const char *, struct stat *);
+int	_fstat			(int, struct stat *);
 void *	_sbrk		(ptrdiff_t);
 pid_t	_getpid		(void);
-int	_kill		(int, int);
+int	_kill			(int, int);
 void	_exit		(int);
-int	_close		(int);
-int	_swiclose	(int);
-int	_open		(const char *, int, ...);
-int	_swiopen	(const char *, int);
-int	_write		(int, const void *, size_t);
-int	_swiwrite	(int, const void *, size_t);
+int	_close			(int);
+int	_swiclose		(int);
+int	_open			(const char *, int, ...);
+int	_swiopen		(const char *, int);
+int	_write			(int, const void *, size_t);
+int	_swiwrite		(int, const void *, size_t);
 _off_t	_lseek		(int, _off_t, int);
 _off_t	_swilseek	(int, _off_t, int);
-int	_read		(int, void *, size_t);
-int	_swiread	(int, void *, size_t);
-void	initialise_monitor_handles (void);
-
+int	_read			(int, void *, size_t);
+int	_swiread		(int, void *, size_t);
 static int	wrap		(int);
 static int	error		(int);
 static int	get_errno	(void);
-static int	remap_handle	(int);
+static int	remap_handle(int);
 static int	findslot	(int);
-static int	_kill_shared	(int, int, int) __attribute__((__noreturn__));
+static int	_kill_shared(int, int, int) __attribute__((__noreturn__));
 
 /* Register name faking - works in collusion with the linker.  */
 register char * stack_ptr asm ("sp");
@@ -69,11 +65,18 @@ extern void   __sinit (struct _reent *);
   while (0)
 
 /* Adjust our internal handles to stay away from std* handles.  */
-#define FILE_HANDLE_OFFSET (0x20)
+// #define FILE_HANDLE_OFFSET (0x20)
+/*
+  if (fh == STDIN_FILENO)
+    return monitor_stdin;
+  if (fh == STDOUT_FILENO)
+    return monitor_stdout;
+  if (fh == STDERR_FILENO)
 
 static int monitor_stdin;
 static int monitor_stdout;
 static int monitor_stderr;
+*/
 
 /* Struct used to keep track of the file position, just so we
    can implement fseek(fh,x,SEEK_CUR).  */
@@ -125,78 +128,15 @@ static int
 remap_handle (int fh)
 {
   CHECK_INIT(_REENT);
-
-  if (fh == STDIN_FILENO)
-    return monitor_stdin;
-  if (fh == STDOUT_FILENO)
-    return monitor_stdout;
-  if (fh == STDERR_FILENO)
-    return monitor_stderr;
-
-  return fh - FILE_HANDLE_OFFSET;
+  return fh;
 }
 
-void
-initialise_monitor_handles (void)
-{
-  int i;
-  
-  /* Open the standard file descriptors by opening the special
-   * teletype device, ":tt", read-only to obtain a descriptor for
-   * standard input and write-only to obtain a descriptor for standard
-   * output. Finally, open ":tt" in append mode to obtain a descriptor
-   * for standard error. Since this is a write mode, most kernels will
-   * probably return the same value as for standard output, but the
-   * kernel can differentiate the two using the mode flag and return a
-   * different descriptor for standard error.
-   */
-
-#ifdef ARM_RDI_MONITOR
-  int volatile block[3];
-
-  block[0] = (int) ":tt";
-  block[2] = 3;     /* length of filename */
-  block[1] = 0;     /* mode "r" */
-  monitor_stdin = do_AngelSWI (AngelSWI_Reason_Open, (void *) block);
-
-  block[0] = (int) ":tt";
-  block[2] = 3;     /* length of filename */
-  block[1] = 4;     /* mode "w" */
-  monitor_stdout = monitor_stderr
-    = do_AngelSWI (AngelSWI_Reason_Open, (void *) block);
-#else
-  int fh;
-  const char * name;
-
-  name = ":tt";
-  asm ("mov r0,%2; mov r1, #0; swi %a1; mov %0, r0"
-       : "=r"(fh)
-       : "i" (SWI_Open),"r"(name)
-       : "r0","r1");
-  monitor_stdin = fh;
-
-  name = ":tt";
-  asm ("mov r0,%2; mov r1, #4; swi %a1; mov %0, r0"
-       : "=r"(fh)
-       : "i" (SWI_Open),"r"(name)
-       : "r0","r1");
-  monitor_stdout = monitor_stderr = fh;
-#endif
-
-  for (i = 0; i < MAX_OPEN_FILES; i ++)
-    openfiles[i].handle = -1;
-
-  openfiles[0].handle = monitor_stdin;
-  openfiles[0].pos = 0;
-  openfiles[1].handle = monitor_stdout;
-  openfiles[1].pos = 0;
-}
 
 static int
 get_errno (void)
 {
-#ifdef ARM_RDI_MONITOR
-  return do_AngelSWI (AngelSWI_Reason_Errno, NULL);
+#if 1 //def ARM_RDI_MONITOR
+	return do_AngelSWI (AngelSWI_Reason_Errno, NULL);
 #else
   register int r0 asm("r0");
   asm ("swi %a1" : "=r"(r0) : "i" (SWI_GetErrno));
@@ -228,8 +168,6 @@ int
 _swiread (int file, void * ptr, size_t len)
 {
   int fh = remap_handle (file);
-/*
-#ifdef ARM_RDI_MONITOR
   int block[3];
 
   block[0] = fh;
@@ -237,22 +175,12 @@ _swiread (int file, void * ptr, size_t len)
   block[2] = (int) len;
 
   return do_AngelSWI (AngelSWI_Reason_Read, block);
-#else
-  register int r0 asm("r0") = fh;
-  register int r1 asm("r1") = (int) ptr;
-  register int r2 asm("r2") = (int) len;
-  asm ("swi %a4"
-       : "=r" (r0)
-       : "0"(r0), "r"(r1), "r"(r2), "i"(SWI_Read));
-  return r0;
-#endif
- */
 }
 
 /* file, is a valid user file handle.
    Translates the return of _swiread into
    bytes read. */
-int __attribute__((weak))
+int // __attribute__((weak))
 _read (int file, void * ptr, size_t len)
 {
   int slot = findslot (remap_handle (file));
@@ -291,7 +219,6 @@ _swilseek (int file, off_t ptr, int dir)
       dir = SEEK_SET;
     }
 
-#ifdef ARM_RDI_MONITOR
   int block[2];
   if (dir == SEEK_END)
     {
@@ -303,27 +230,6 @@ _swilseek (int file, off_t ptr, int dir)
   block[0] = remap_handle (file);
   block[1] = ptr;
   res = do_AngelSWI (AngelSWI_Reason_Seek, block);
-#else
-  register int r0 asm("r0");
-  register int r1 asm("r1");
-  if (dir == SEEK_END)
-    {
-      r0 = (int) fh;
-      asm ("swi %a2"
-	   : "=r" (r0)
-	   : "0"(r0), "i" (SWI_Flen));
-      res = r0;
-      ptr += res;
-    }
-
-  /* This code only does absolute seeks.  */
-  r0 = (int) fh;
-  r1 = (int) ptr;
-  asm ("swi %a3"
-       : "=r" (r0)
-       : "0"(r0), "r"(r1), "i" (SWI_Seek));
-  res = r0;
-#endif
 
   if (slot != MAX_OPEN_FILES && res == 0)
     openfiles[slot].pos = ptr;
@@ -350,10 +256,17 @@ _swiwrite (int file, const void * ptr, size_t len)
   block[1] = (int) ptr;
   block[2] = (int) len;
 
-//  return do_AngelSWI (AngelSWI_Reason_Write, block);
+// return do_AngelSWI (AngelSWI_Reason_Write, block);
 
 // STDOUTを仮定.
-
+ 
+	if(fh != STDOUT_FILENO) {
+	 if(fh != STDERR_FILENO) {
+		 return 0;
+	 }
+	}
+// STDOUT以外は、未実装.
+	
 	char *p = ptr;
 	int i;
 	for(i=0;i<len;i++) {
@@ -384,9 +297,7 @@ int
 _swiopen (const char * path, int flags)
 {
   int aflags = 0, fh;
-#ifdef ARM_RDI_MONITOR
   int block[3];
-#endif
 
   int i = findslot (-1);
 
@@ -414,7 +325,7 @@ _swiopen (const char * path, int flags)
       aflags |= 8;
     }
 
-#ifdef ARM_RDI_MONITOR
+#if 1 //def ARM_RDI_MONITOR
   block[0] = (int) path;
   block[2] = strlen (path);
   block[1] = aflags;
@@ -436,7 +347,7 @@ _swiopen (const char * path, int flags)
       openfiles[i].pos = 0;
     }
 
-  return fh >= 0 ? fh + FILE_HANDLE_OFFSET : error (fh);
+  return fh >= 0 ? fh : error (fh);
 }
 
 int
@@ -454,7 +365,7 @@ _swiclose (int file)
   if (slot != MAX_OPEN_FILES)
     openfiles[slot].handle = -1;
 
-#ifdef ARM_RDI_MONITOR
+#if 1 //def ARM_RDI_MONITOR
   return do_AngelSWI (AngelSWI_Reason_Close, & myhan);
 #else
   register int r0 asm("r0") = myhan;
@@ -473,7 +384,7 @@ static int
 _kill_shared (int pid, int sig, int reason)
 {
   (void) pid; (void) sig;
-#ifdef ARM_RDI_MONITOR
+#if 1 //def ARM_RDI_MONITOR
   /* Note: The pid argument is thrown away.  */
   int block[2];
   block[1] = sig;
@@ -552,7 +463,7 @@ _sbrk (ptrdiff_t incr)
 /* Heap limit returned from SYS_HEAPINFO Angel semihost call.  */
 uint __heap_limit = 0xcafedead;
 
-void * __attribute__((weak))
+void * //__attribute__((weak))
 _sbrk (ptrdiff_t incr)
 {
   static char * heap_end;
@@ -594,7 +505,7 @@ _sbrk (ptrdiff_t incr)
 
 extern void memset (struct stat *, int, unsigned int);
 
-int __attribute__((weak))
+int //__attribute__((weak))
 _fstat (int file, struct stat * st)
 {
   memset (st, 0, sizeof (* st));
@@ -604,7 +515,7 @@ _fstat (int file, struct stat * st)
   file = file;
 }
 
-int __attribute__((weak))
+int //__attribute__((weak))
 _stat (const char *fname, struct stat *st)
 {
   int file;
@@ -621,7 +532,7 @@ _stat (const char *fname, struct stat *st)
   return 0;
 }
 
-int __attribute__((weak))
+int //__attribute__((weak))
 _link (const char *__path1 __attribute__ ((unused)), const char *__path2 __attribute__ ((unused)))
 {
   errno = ENOSYS;
@@ -631,7 +542,7 @@ _link (const char *__path1 __attribute__ ((unused)), const char *__path2 __attri
 int
 _unlink (const char *path)
 {
-#ifdef ARM_RDI_MONITOR
+#if 0 //def ARM_RDI_MONITOR
   int block[2];
   block[0] = (int)path;
   block[1] = strlen(path);
@@ -655,7 +566,7 @@ _gettimeofday (struct timeval * tp, void * tzvp)
   if (tp)
     {
     /* Ask the host for the seconds since the Unix epoch.  */
-#ifdef ARM_RDI_MONITOR
+#if 1 //def ARM_RDI_MONITOR
       tp->tv_sec = do_AngelSWI (AngelSWI_Reason_Time,NULL);
 #else
       {
@@ -683,7 +594,7 @@ _times (struct tms * tp)
 {
   clock_t timeval;
 
-#ifdef ARM_RDI_MONITOR
+#if 1 //def ARM_RDI_MONITOR
   timeval = do_AngelSWI (AngelSWI_Reason_Clock, NULL);
 #else
   register int r0 asm("r0");
@@ -717,7 +628,7 @@ _isatty (int fd)
 int
 _system (const char *s)
 {
-#ifdef ARM_RDI_MONITOR
+#if 1 //def ARM_RDI_MONITOR
   int block[2];
   int e;
 
@@ -751,7 +662,7 @@ _system (const char *s)
 int
 _rename (const char * oldpath, const char * newpath)
 {
-#ifdef ARM_RDI_MONITOR
+#if 1 //def ARM_RDI_MONITOR
   int block[4];
   block[0] = (int) oldpath;
   block[1] = strlen(oldpath);

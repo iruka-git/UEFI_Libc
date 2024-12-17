@@ -45,9 +45,9 @@ EFI_STATUS efi_main(EFI_HANDLE image, EFI_SYSTEM_TABLE *sys_table)
 	global_eST = sys_table;
 	InitializeLib(image, sys_table);  // I need It.
 
-ZZ	cmd_User();
+	cmd_User();
 	
-ZZ	basic_main();
+	basic_main();
 
 	return EFI_SUCCESS;
 }
