@@ -17,6 +17,8 @@
 #include <sys/wait.h>
 #include "swi.h"
 
+#include "../../../ub_util.h"
+
 /* Forward prototypes.  */
 int	_system			(const char *);
 int	_rename			(const char *, const char *);
@@ -49,8 +51,12 @@ static int	remap_handle(int);
 static int	findslot	(int);
 static int	_kill_shared(int, int, int) __attribute__((__noreturn__));
 
+typedef unsigned int uint;
+
+
+
 /* Register name faking - works in collusion with the linker.  */
-register char * stack_ptr asm ("sp");
+// register char * stack_ptr asm ("sp");
 
 
 /* following is copied from libc/stdio/local.h to check std streams */
@@ -270,7 +276,7 @@ _swiwrite (int file, const void * ptr, size_t len)
 	char *p = ptr;
 	int i;
 	for(i=0;i<len;i++) {
-		ub_putchar(*p++);
+		ub_outchar(*p++);
 	}
 	return len;
 }
@@ -442,6 +448,7 @@ _getpid (void)
   return (pid_t)1;
 }
 
+#if 1
 char mempool[0x10000];
 
 void *
@@ -457,7 +464,41 @@ _sbrk (ptrdiff_t incr)
 
 	return (void *) prev_heap_end;
 }
+#endif
 
+#if 0
+#define POOL_SIZE 0x8000
+#define POOL_MARGIN 0x100
+
+static char *heap_end=NULL;
+static char *prev_heap_end=NULL;
+
+void *_sbrk (ptrdiff_t incr)
+{
+	uint size = POOL_SIZE;
+	if( size < (incr+POOL_MARGIN) ) {
+		size = (incr+POOL_MARGIN);
+		char *large_heap = ub_malloc(size);
+		return (void *) large_heap;
+	}
+	uint rest = (uint)prev_heap_end - (uint)heap_end;
+	if( incr >= rest ) {
+		// 新規にメモリープールを取得.
+		heap_end = ub_malloc(size);
+	}
+	prev_heap_end = heap_end;
+	heap_end     += incr;
+
+	return (void *) prev_heap_end;
+}
+#endif
+
+#if 0
+void *_sbrk (ptrdiff_t incr)
+{
+	return ub_malloc(incr);
+}
+#endif
 
 #if 0
 /* Heap limit returned from SYS_HEAPINFO Angel semihost call.  */

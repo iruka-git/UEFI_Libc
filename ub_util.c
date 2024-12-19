@@ -35,6 +35,17 @@ void ub_putsYn(int f)
 	}
 }
 
+void	*ub_malloc(uint size)
+{
+#if 0
+	return AllocatePool(size);
+#else
+	void *p = AllocatePool(size);
+//	printf("AllocatePool(%x)=%lx\n",size,(long)p);
+	return p;
+#endif
+}
+
 
 /***************************************************************************/
 /* Function declaration for GCC */
@@ -147,8 +158,8 @@ int ub_c2u(ushort *pwcs, const char *s, int n)
 int ub_putchar(int character)
 {
 	CHAR16 ch[2]; /* This variable needs to be an array of 2 or else an extra space prints */
-	ub_c2u(ch,(char *)&character,1);
-
+	ch[0]=character;
+	ch[1]=0;
 	uefi_call_wrapper(global_eST->ConOut->OutputString, 2, global_eST->ConOut, ch);
 
 	return character;

@@ -17,5 +17,7 @@ int     ub_putchar(int character);
 void	ub_outchar(uchar c);
 uchar	ub_breakcheck(void);
 
+void	*ub_malloc(uint size);
+
 #endif 
 
