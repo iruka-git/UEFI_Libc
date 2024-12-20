@@ -41,7 +41,7 @@ void	*ub_malloc(uint size)
 	return AllocatePool(size);
 #else
 	void *p = AllocatePool(size);
-//	printf("AllocatePool(%x)=%lx\n",size,(long)p);
+	ub_printf("AllocatePool(%x)=%lx  : ",size,(long)p);
 	return p;
 #endif
 }

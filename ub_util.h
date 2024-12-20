@@ -19,5 +19,7 @@ uchar	ub_breakcheck(void);
 
 void	*ub_malloc(uint size);
 
+void    ub_printf(const char *fmt , ...);
+
 #endif 
 

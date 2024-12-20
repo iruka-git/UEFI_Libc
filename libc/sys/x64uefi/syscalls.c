@@ -448,7 +448,7 @@ _getpid (void)
   return (pid_t)1;
 }
 
-#if 1
+#if 0
 char mempool[0x10000];
 
 void *
@@ -462,12 +462,14 @@ _sbrk (ptrdiff_t incr)
 	prev_heap_end = heap_end;
 	heap_end += incr;
 
+	ub_printf("  _sbrk(%8x)= %lx -  %lx\n",(int)incr,(long)prev_heap_end,(long)heap_end);
+		
 	return (void *) prev_heap_end;
 }
 #endif
 
-#if 0
-#define POOL_SIZE 0x8000
+#if 1
+#define POOL_SIZE 0x100000
 #define POOL_MARGIN 0x100
 
 static char *heap_end=NULL;
