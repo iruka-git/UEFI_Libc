@@ -374,7 +374,9 @@ LibcObjs = \
 	libc/stdlib/mlock.o  \
 	libc/stdlib/malloc.o  \
 	libc/stdlib/realloc.o  \
-	libc/stdlib/_mallocr.o  \
+	libc/stdlib/mallocr.o  \
+	libc/stdlib/freer.o  \
+	libc/stdlib/reallocr.o  \
 	libc/stdlib/system.o  \
 	libc/stdlib/rand_r.o  \
 	libc/stdlib/exit.o  \
@@ -383,6 +385,7 @@ LibcObjs = \
 	libc/stdlib/__call_atexit.o  \
 	libc/sys/x64uefi/syscalls.o  \
 
+#	libc/stdlib/_mallocr.o  \
 #	libc/stdlib/dtoa.o  \
 #	libc/stdlib/utoa.o  \
 #	libc/stdlib/strtoll.o  \
