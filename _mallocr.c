@@ -306,7 +306,7 @@ extern "C" {
 #include <reent.h>
 
 #define POINTER_UINT unsigned _POINTER_INT
-//#define SEPARATE_OBJECTS
+#define SEPARATE_OBJECTS
 #define HAVE_MMAP 0
 #define MORECORE(size) _sbrk_r(reent_ptr, (size))
 #define MORECORE_CLEARS 0
@@ -476,10 +476,28 @@ extern void __malloc_unlock();
   WIN32 causes an emulation of sbrk to be compiled in
   mmap-based options are not currently supported in WIN32.
 */
-
+#define WIN32
+#undef 	MORECORE
+#define ASSERT(x)
+typedef int BOOL;
+#define MEM_COMMIT 0
+#define MEM_DECOMMIT 0
+#define MEM_RELEASE  0
+#define MEM_FREE     0
+#define MEM_RESERVE  0
+#define PAGE_NOACCESS  0
+#define PAGE_READWRITE 0
+	
+	
+typedef struct MEMORY_BASIC_INFORMATION {
+	int   State;
+	void *BaseAddress;
+	long  RegionSize;
+} MEMORY_BASIC_INFORMATION;
+		
 /* #define WIN32 */
 #ifdef WIN32
-#define MORECORE wsbrk
+# define MORECORE wsbrk
 #define HAVE_MMAP 0
 #endif
 
@@ -1130,7 +1148,7 @@ GmListElement* makeGmListElement (void* bas)
 	}
 	return this;
 }
-
+static
 void gcleanup ()
 {
 	BOOL rval;
@@ -1170,7 +1188,7 @@ void* findRegion (void* start_address, unsigned long size)
 	
 }
 
-
+static
 void* wsbrk (long size)
 {
 	void* tmp;
@@ -2652,14 +2670,13 @@ void fREe(RARG mem) RDECL Void_t* mem;
 
   if (mem == 0)                              /* free(0) has no effect */
     return;
-ZZ
+
   MALLOC_LOCK;
-ZZ
+
   p = mem2chunk(mem);
   hd = p->size;
-ZZ
+
 #if HAVE_MMAP
-ZZ
   if (hd & IS_MMAPPED)                       /* release mmapped memory. */
   {
     munmap_chunk(p);
@@ -2667,19 +2684,17 @@ ZZ
     return;
   }
 #endif
-ZZ  
+  
   check_inuse_chunk(p);
-ZZ  
+  
   sz = hd & ~PREV_INUSE;
-ZZ
-	next = chunk_at_offset(p, sz);
-ZZ
-	nextsz = chunksize(next);
-ZZ  
+  next = chunk_at_offset(p, sz);
+  nextsz = chunksize(next);
+  
   if (next == top)                            /* merge with top */
   {
     sz += nextsz;
-ZZ
+
     if (!(hd & PREV_INUSE))                    /* consolidate backward */
     {
       prevsz = p->prev_size;
@@ -2687,35 +2702,31 @@ ZZ
       sz += prevsz;
       unlink(p, bck, fwd);
     }
-ZZ
+
     set_head(p, sz | PREV_INUSE);
     top = p;
     if ((unsigned long)(sz) >= (unsigned long)trim_threshold) 
       malloc_trim(RCALL top_pad); 
-ZZ
-	MALLOC_UNLOCK;
-ZZ
-	return;
+    MALLOC_UNLOCK;
+    return;
   }
-ZZ
+
   set_head(next, nextsz);                    /* clear inuse bit */
 
   islr = 0;
-ZZ
+
   if (!(hd & PREV_INUSE))                    /* consolidate backward */
   {
-ZZ
-	prevsz = p->prev_size;
-ZZ    p = chunk_at_offset(p, -prevsz);
-ZZ    sz += prevsz;
+    prevsz = p->prev_size;
+    p = chunk_at_offset(p, -prevsz);
+    sz += prevsz;
     
-    if (p->fd == last_remainder) {             /* keep as last_remainder */
-ZZ      islr = 1;
-    }else{
-ZZ      unlink(p, bck, fwd);
-ZZ	}
+    if (p->fd == last_remainder)             /* keep as last_remainder */
+      islr = 1;
+    else
+      unlink(p, bck, fwd);
   }
-ZZ  
+  
   if (!(inuse_bit_at_offset(next, nextsz)))   /* consolidate forward */
   {
     sz += nextsz;
@@ -2728,15 +2739,15 @@ ZZ
     else
       unlink(next, bck, fwd);
   }
-ZZ
+
 
   set_head(p, sz | PREV_INUSE);
   set_foot(p, sz);
   if (!islr)
     frontlink(p, sz, idx, bck, fwd);  
-ZZ
+
   MALLOC_UNLOCK;
-ZZ
+
 #endif /* MALLOC_PROVIDED */
 }
 
