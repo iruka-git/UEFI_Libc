@@ -307,7 +307,13 @@ extern "C" {
 
 #define POINTER_UINT unsigned _POINTER_INT
 #define SEPARATE_OBJECTS
-#define HAVE_MMAP 0
+//#define HAVE_MMAP 0
+#define HAVE_MMAP 1
+#define PROT_READ 0
+#define PROT_WRITE 0
+#define MAP_PRIVATE 0
+#define MAP_ANONYMOUS 0
+
 #define MORECORE(size) _sbrk_r(reent_ptr, (size))
 #define MORECORE_CLEARS 0
 #define MALLOC_LOCK __malloc_lock(reent_ptr)
@@ -476,28 +482,10 @@ extern void __malloc_unlock();
   WIN32 causes an emulation of sbrk to be compiled in
   mmap-based options are not currently supported in WIN32.
 */
-#define WIN32
-#undef 	MORECORE
-#define ASSERT(x)
-typedef int BOOL;
-#define MEM_COMMIT 0
-#define MEM_DECOMMIT 0
-#define MEM_RELEASE  0
-#define MEM_FREE     0
-#define MEM_RESERVE  0
-#define PAGE_NOACCESS  0
-#define PAGE_READWRITE 0
-	
-	
-typedef struct MEMORY_BASIC_INFORMATION {
-	int   State;
-	void *BaseAddress;
-	long  RegionSize;
-} MEMORY_BASIC_INFORMATION;
-		
+
 /* #define WIN32 */
 #ifdef WIN32
-# define MORECORE wsbrk
+#define MORECORE wsbrk
 #define HAVE_MMAP 0
 #endif
 
@@ -653,7 +641,7 @@ do {                                                                          \
 
 #include <unistd.h>
 #include <fcntl.h>
-#include <sys/mman.h>
+//#include <sys/mman.h>
 
 #if !defined(MAP_ANONYMOUS) && defined(MAP_ANON)
 #define MAP_ANONYMOUS MAP_ANON
@@ -1148,7 +1136,7 @@ GmListElement* makeGmListElement (void* bas)
 	}
 	return this;
 }
-static
+
 void gcleanup ()
 {
 	BOOL rval;
@@ -1188,7 +1176,7 @@ void* findRegion (void* start_address, unsigned long size)
 	
 }
 
-static
+
 void* wsbrk (long size)
 {
 	void* tmp;

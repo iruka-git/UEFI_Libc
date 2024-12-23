@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <limits.h>
 
-int __global_locale(void)	{return 0;}
-int __locale_mb_cur_max(void)	{return 0;}
+int __global_locale(void)	 {return 0;}
+int __locale_mb_cur_max(void){return 0;}
 int _strtod_r(void)		{return 0;}
 int _strtol_r(void)		{return 0;}
 int _strtoul_r(void)	{return 0;}
@@ -28,6 +28,8 @@ int getenv(void)		{return 0;}
 int nanf(void)			{return 0;}
 int environ(void)		{return 0;}
 
+int mmap(void)		    {return 0;}
+int munmap(void)		{return 0;}
 
 /*
 int __sfp(void)			{return 0;}
