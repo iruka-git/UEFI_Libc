@@ -50,19 +50,21 @@ void cmd_MallocTest(void)
 {
 	int n;
 	int size;
-	char *buf[32];
+	char *buf[1024];
 	char *p;
-	for(n=1;n<16;n++) {
+	for(n=1;n<32;n++) {
 		size = 1<<(8+n);
-//		p = malloc(size);
-		p = calloc(1,size);
+//		size = 0x10000;
+		p = malloc(size);
+//		p = calloc(1,size);
 		buf[n] = p;
 		printf("* malloc(%8d)=%lx\n",size,(long)p);
 		if(p==NULL) {
 			break;
 		}
+		memset(p,0,size);
 	}
-
+return;
 	for(n=n-1;n>=1;n--) {
 		p = buf[n];
 		printf("* %8d: free(%lx)\n",n,(long)p);

@@ -1,6 +1,8 @@
 #
 libc/include/uefi/newlib.h
 ub_test.c
+ub_util.c
+ub_sbrk.c
 libc/sys/x64uefi/syscalls.c
 libc/stdlib/malloc.c
 libc/stdlib/_mallocr.c
@@ -12,7 +14,6 @@ libc/stdio/vfprintf.c
 libc/stdio/putchar.c
 libc/stdlib/system.c
 libc/stdlib/rand_r.c
-ub_util.c
 #
 libc/errno/errno.c
 libc/misc/lock.c
