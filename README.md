@@ -70,6 +70,19 @@ https：//github.com/LHerrmeyer/UEFI_Basic
 ・以前はLinuxコマンドライン上でもbasicが実行可能なMakefileを用意していましたが、
 現在はUEFI環境へのLibc移植に主眼を置いているため、サポートしていません。
 
+## 注意事項２（ malloc() 、 sbrk() ）
+
+・BASICの USER文を実行すると、ub_test.c 内の malloc() / free() テストが走行します。
+
+・こういったストレステストを実施しない場合は、Makefile 内にある qemu の実行パラメータ
+　オプションの -m 8G や -m 2G 等のメモリー指定は不要です。（外してから実行します）
+
+・-m 8G を指定する場合は、qemuを動かすホストLinux (VMでももちろん可) の実装メモリー
+　は12GB 以上用意してください。
+
+
+
+
 
 ## 実機で動くのか？
 

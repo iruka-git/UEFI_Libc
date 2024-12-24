@@ -49,22 +49,24 @@ void logprint(char *mesg,char *file,int line)
 void cmd_MallocTest(void)
 {
 	int n;
-	int size;
+	long size;
 	char *buf[1024];
 	char *p;
 	for(n=1;n<32;n++) {
-		size = 1<<(8+n);
-//		size = 0x10000;
+		size = 1L << (8+n);
 		p = malloc(size);
 //		p = calloc(1,size);
 		buf[n] = p;
-		printf("* malloc(%8d)=%lx\n",size,(long)p);
+		printf("* malloc(%10ld)=%lx\n",size,(long)p);
 		if(p==NULL) {
 			break;
 		}
 		memset(p,0,size);
 	}
-return;
+
+	p = malloc(256); //ANCHOR!
+	//return;
+
 	for(n=n-1;n>=1;n--) {
 		p = buf[n];
 		printf("* %8d: free(%lx)\n",n,(long)p);

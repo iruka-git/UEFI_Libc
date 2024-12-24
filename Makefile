@@ -84,7 +84,8 @@ qemu:
 	-mkdir fs/EFI
 	-mkdir fs/EFI/BOOT
 	cp BOOTX64.EFI fs/EFI/BOOT/
-	qemu-system-x86_64 -m 2G -bios OVMF.fd -drive file=fat:rw:fs
+	qemu-system-x86_64 -m 8G -bios OVMF.fd -drive file=fat:rw:fs
+#	qemu-system-x86_64 -m 2G -bios OVMF.fd -drive file=fat:rw:fs
 #
 # ===  実行
 #
