@@ -54,8 +54,8 @@ void cmd_MallocTest(void)
 	char *p;
 	for(n=1;n<16;n++) {
 		size = 1<<(8+n);
-		p = malloc(size);
-//		p = calloc(1,size);
+//		p = malloc(size);
+		p = calloc(1,size);
 		buf[n] = p;
 		printf("* malloc(%8d)=%lx\n",size,(long)p);
 		if(p==NULL) {

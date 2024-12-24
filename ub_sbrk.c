@@ -10,6 +10,9 @@
 
 #define PAGE_SIZE 4096
 
+//#define INITIALPAGES 4
+#define INITIALPAGES 256
+
 static VOID* heap_base = NULL;
 static VOID* heap_current = NULL;
 static VOID* heap_limit = NULL;
@@ -23,7 +26,7 @@ void* ub_sbrk(unsigned long increment)
     if (heap_base == NULL) {
         // 初回呼び出し時にヒープ領域を確保
         EFI_STATUS status;
-        UINTN pages = 4; // 初期割り当てページ数（必要に応じて調整可能）
+        UINTN pages = INITIALPAGES; // 初期割り当てページ数（必要に応じて調整可能）
         status = gBS->AllocatePages(AllocateAnyPages, EfiBootServicesData, pages, (EFI_PHYSICAL_ADDRESS*)&heap_base);
 
         if (EFI_ERROR(status)) {
