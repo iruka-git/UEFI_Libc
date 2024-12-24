@@ -41,6 +41,7 @@ include ./LibcObjs
 systemd_boot_objects = \
 	basic.o \
 	ub_util.o \
+	ub_sbrk.o \
 	ub_test.o \
 	undef.o \
 	$(LibcObjs)

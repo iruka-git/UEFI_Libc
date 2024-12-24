@@ -93,24 +93,18 @@ typedef struct
 }
 poslog;
 
-
+/*****************************************************************
+ *  おそらくAngelという ARMの開発用基板でサポートされていたSystemCall
+ *  単なるダミー
+ *****************************************************************
+ */
 do_AngelSWI (int reason, void * arg)
 {
-  int value = 0;
-#if 0
-  asm volatile ("mov r0, %1; mov r1, %2; " AngelSWIInsn " %a3; mov %0, r0"
-       : "=r" (value) /* Outputs */
-       : "r" (reason), "r" (arg), "i" (AngelSWI) /* Inputs */
-       : "r0", "r1", "r2", "r3", "ip", "lr", "memory", "cc"
-		/* Clobbers r0 and r1, and lr if in supervisor mode */);
-                /* Accordingly to page 13-77 of ARM DUI 0040D other registers
-                   can also be clobbered.  Some memory positions may also be
-                   changed by a system call, so they should not be kept in
-                   registers. Note: we are assuming the manual is right and
-                   Angel is respecting the APCS.  */
-#endif
+	int value = 0;
 
-  return value;
+	// ・・・
+
+	return value;
 }
 
 
@@ -449,6 +443,10 @@ _getpid (void)
 }
 
 #if 0
+/*****************************************************************
+ *   _sbrk() の実装例（１）：1MByte の固定プールから切り出す.
+ *****************************************************************
+ */
 char mempool[0x10000];
 
 void *
@@ -468,7 +466,12 @@ _sbrk (ptrdiff_t incr)
 }
 #endif
 
-#if 1
+#if 0
+/*****************************************************************
+ *   _sbrk() の実装例（２）：AllocatePool()を呼んでみる. NGでした
+ *   heapが分割され、かつ若い方向のメモリーが返ってくるのでエラー
+ *****************************************************************
+ */
 #define POOL_SIZE 0x100000
 #define POOL_MARGIN 0x100
 
@@ -496,13 +499,12 @@ void *_sbrk (ptrdiff_t incr)
 #endif
 
 #if 0
-void *_sbrk (ptrdiff_t incr)
-{
-	return ub_malloc(incr);
-}
-#endif
 
-#if 0
+/*****************************************************************
+ *   _sbrk() の実装例（３）：syscall.c にあった オリジナル版 
+ *     MMU無しなら行ける。UEFIでは使えない
+ *****************************************************************
+ */
 /* Heap limit returned from SYS_HEAPINFO Angel semihost call.  */
 uint __heap_limit = 0xcafedead;
 
@@ -545,6 +547,26 @@ _sbrk (ptrdiff_t incr)
 }
 #endif
 
+
+#if 1
+
+/*****************************************************************
+ *   _sbrk() の実装例（４）： 【 採用 】
+
+  UEFIの AllocaltePages()を呼び出してsbrk()を実装してもらいました。
+
+ * syscalls.c 側には実装せず、呼び出しのみです。
+ * （ubは μ Basicの略）
+ *****************************************************************
+ */
+void* ub_sbrk(unsigned long increment);
+
+void *_sbrk (ptrdiff_t incr)
+{
+	return ub_sbrk(incr);
+}
+
+#endif
 
 extern void memset (struct stat *, int, unsigned int);
 

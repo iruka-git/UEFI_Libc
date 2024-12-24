@@ -4,6 +4,10 @@
 
 #include "ub_util.h"
 
+
+#define AUTOEXEC_USER_FUNC 0
+
+
 EFI_SYSTEM_TABLE *global_eST = (void *) 0 ;
 
 
@@ -26,18 +30,9 @@ int  ub_putsW(ushort *s)
 	return 0;
 }
 
-void ub_putsYn(int f)
-{
-	if(f) {
-		ub_puts("True\n");
-	}else{
-		ub_puts("False\n");
-	}
-}
-
 void	*ub_malloc(uint size)
 {
-#if 0
+#if 1
 	return AllocatePool(size);
 #else
 	void *p = AllocatePool(size);
@@ -56,8 +51,9 @@ EFI_STATUS efi_main(EFI_HANDLE image, EFI_SYSTEM_TABLE *sys_table)
 	global_eST = sys_table;
 	InitializeLib(image, sys_table);  // I need It.
 
+#if AUTOEXEC_USER_FUNC
 	cmd_User();
-	
+#endif	
 	basic_main();
 
 	return EFI_SUCCESS;
